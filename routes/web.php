@@ -1,8 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +12,13 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-// Front
-Route::get('/', [\App\Http\Controllers\frontController::class, 'index'])->name('front-index');
-Route::get('/login', 'frontController@login')->name('login');
 
-// User
-//Route::get('/user', [UserController::class, 'index'])->name('user');
+Route::get('/', function () {
+    return view('welcome');
+});
 
-// Admin
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
+require __DIR__.'/auth.php';
